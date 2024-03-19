@@ -1,0 +1,15 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application android:icon="@drawable/ic_baseline_groovy_24">
+        <meta-data
+            android:name="com.m8test.plugin.type"
+            android:value="language-document" />
+        <meta-data
+            android:name="com.m8test.plugin.name"
+            android:value="GroovyDocument" />
+        <!-- 文档所属的语言 -->
+        <meta-data
+            android:name="com.m8test.plugin.language.name"
+            android:value="Groovy" />
+    </application>
+</manifest>

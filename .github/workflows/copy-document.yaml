@@ -1,0 +1,16 @@
+name: 复制文件
+on:
+#  push:
+  workflow_dispatch:
+jobs:
+  copy:
+    uses: ./.github/workflows/copy-part-files.yaml
+    with:
+      srcRepository: m8test/groovy
+      destRepository: m8test/GroovyDocument
+      srcPath: "./document/src/main/assets/document/"
+      destPath: "./"
+      debug: true
+    secrets:
+      srcToken: ${{ secrets.GITHUB_TOKEN }}
+      destToken: ${{ secrets.GH_TOKEN }}

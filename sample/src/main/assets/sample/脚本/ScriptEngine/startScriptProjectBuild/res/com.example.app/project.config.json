@@ -1,0 +1,20 @@
+{
+  "author": {
+    "email": "",
+    "name": "",
+    "profile": "",
+    "website": ""
+  },
+  "description": "",
+  "entry": "entry",
+  "initScripts": [],
+  "language": "Groovy",
+  "logo": "logo.png",
+  "name": "Example",
+  "packageName": "com.example.app",
+  "uuid": "6d468c4f-7a45-4d8c-aa2c-3e614701bff3",
+  "version": {
+    "code": 1,
+    "name": "1.0.1"
+  }
+}

@@ -1,0 +1,90 @@
+name: 构建安卓app
+on:
+#  push:
+  workflow_dispatch:
+    inputs:
+      java:
+        description: java版本
+        default: 17
+        required: true
+      gradleTask:
+        description: 构建app需要执行的gradle任务
+        default: ":document:assembleRelease"
+        required: true
+      apkPath:
+        description: 任务执行后生成的apk所在目录
+        default: "document/build/outputs/apk/release"
+        required: true
+      keystore:
+        description: 密钥所在路径，相对于项目根目录
+        default: "m8test.jks"
+        required: true
+
+jobs:
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    env:
+      JAVA_VERSION: ${{ inputs.java || '17' }}
+      GRADLE_TASK: ${{ inputs.gradleTask || ':document:assembleRelease' }}
+      APK_PATH: ${{ inputs.apkPath || 'document/build/outputs/apk/release' }}
+      KEYSTORE: ${{ inputs.keystore || 'm8test.jks' }}
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+      - name: 安装java${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin' # See 'Supported distributions' for available options
+          java-version: ${{ env.JAVA_VERSION }}
+      - name: 授予 ./gradlew 执行权限
+        run: chmod +x ./gradlew
+      - name: 写入密钥信息
+        run: |
+          cat << EOF > local.properties
+          storePassword=${{ secrets.STORE_PASSWORD }}
+          keyPassword=${{ secrets.KEY_PASSWORD }}
+          keyAlias=${{ secrets.KEY_ALIAS }}
+          storeFile=${{ env.KEYSTORE }}
+          EOF
+          cat local.properties
+      - name: 执行gradle任务
+        run: ./gradlew ${{ env.GRADLE_TASK }}
+#      - name: 检验生成的apk是否都已经签名了
+#        run: |
+#          for file in "${{ env.GITHUB_WORKSPACE }}/${{ env.APK_PATH }}"/*.apk ; do
+#            # 验证apk文件是否已经签名
+#            echo "正在验证apk签名信息:$file"
+##            ./apksigner verify "$file"
+#          done
+
+#      - name: upload lite python bundle assets
+#        uses: softprops/action-gh-release@v1
+#        with:
+#          tag_name: ${{ inputs.tag_name }}
+#          files:
+#            /tmp/python-bundle-lite-${{ matrix.arch }}.tar.gz
+#
+#      - name: upload lite python bundle
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: python-bundle-lite-${{ matrix.arch }}
+#          path: /tmp/python-bundle-lite-${{ matrix.arch }}.tar.gz # or path/to/artifact
+#
+#      - name: zip python full bundle
+#        run: |
+#          tar -cvf /tmp/python-bundle-full-${{ matrix.arch }}.tar ~/.local/share/python-for-android/
+#          gzip /tmp/python-bundle-full-${{ matrix.arch }}.tar
+#
+#      - name: upload full python bundle assets
+#        uses: softprops/action-gh-release@v1
+#        with:
+#          tag_name: ${{ inputs.tag_name }}
+#          files:
+#            /tmp/python-bundle-full-${{ matrix.arch }}.tar.gz
+#
+#      - name: upload full python bundle
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: python-bundle-full-${{ matrix.arch }}
+#          path: /tmp/python-bundle-full-${{ matrix.arch }}.tar.gz # or path/to/artifact

@@ -1,0 +1,18 @@
+{
+  "author": {
+    "email": "",
+    "name": "",
+    "profile": "",
+    "website": ""
+  },
+  "description": "",
+  "entry": "/com/example/app/entry.groovy",
+  "language": "Groovy",
+  "logo": "logo.png",
+  "name": "Example",
+  "packageName": "com.example.app",
+  "version": {
+    "code": 1,
+    "name": "1.0.1"
+  }
+}
