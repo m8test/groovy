@@ -2,10 +2,6 @@ package com.m8test.gradle.plugin
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.publish.PublishingExtension
-//import org.gradle.api.publish.maven.MavenPublication
-import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.create
 
 /**
  * Author: HyLee
@@ -24,18 +20,19 @@ class PublishLocalPlugin : Plugin<Project> {
     private fun Project.publish() {
         // 发布到本地仓库,需要通过clean任务,preBuild会报错
         apply(mapOf("plugin" to "maven-publish"))
-        configure<PublishingExtension> {
+       // 在根目录新建aars文件夹，然后将aar文件存放到该目录就可以了
+//        configure<PublishingExtension> {
 //            val libsDirName = "aars"
-            publications {
+//            publications {
 //                create<MavenPublication>("maven") {
 //                    groupId = "com.m8test"
 //                    artifactId = "javet"
 //                    version = "1.0.7"
 //                    artifact("$libsDirName/javet-android-1.0.7.aar")
 //                }
-                // and so on...
-            }
-        }
+//                // and so on...
+//            }
+//        }
 
         // add the publication before the build even starts
         // used ./gradlew mymodule:assemble --dry-run to find where to put it

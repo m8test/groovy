@@ -13,9 +13,9 @@ buildscript {
         google()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:8.3.0")
+        classpath("com.android.tools.build:gradle:${m8test.versions.agp.get()}")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${m8test.versions.kotlinVersion.get()}")
-        classpath("com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:${m8test.versions.kotlinVersion.get()}-1.0.17")
+        classpath("com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:${m8test.versions.kotlinVersion.get()}-1.0.19")
     }
 }
 
@@ -24,7 +24,7 @@ tasks.register("clean", Delete::class.java) {
 }
 
 plugins {
-    id("com.m8test.gradle.version") apply false
+    id("com.m8test.gradle.version.sync") apply false
 }
 
 apply(mapOf("plugin" to com.m8test.gradle.plugin.VersionSyncPlugin::class.java))

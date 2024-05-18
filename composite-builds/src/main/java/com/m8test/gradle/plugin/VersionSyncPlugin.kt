@@ -1,6 +1,6 @@
 package com.m8test.gradle.plugin
 
-import com.m8test.gradle.ProjectSettings
+import com.m8test.gradle.Versions
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -22,186 +22,190 @@ class VersionSyncPlugin : Plugin<Project> {
         //在这个例子里用不到这个语句，该语句的作用是全局移除某个依赖
 //        all*.exclude group: 'androidx.navigation', module: 'navigation-fragment'
 //        all*.exclude group: 'com.google.guava', module: 'listenablefuture'
-        subprojects {
+        allprojects {
             project.configurations.configureEach {
                 resolutionStrategy.eachDependency {
                     val moduleName = requested.module.name
                     val groupName = requested.group
                     if (groupName == "com.android.support:appcompat-v7") {
-                        useVersion(ProjectSettings.versions.SupportLibVersion)
+                        useVersion(Versions.SupportLibVersion)
                     } else if (groupName == "com.android.support:appcompat-v4") {
-                        useVersion(ProjectSettings.versions.SupportLibVersion)
+                        useVersion(Versions.SupportLibVersion)
                     } else if (groupName == "androidx.activity") {
-                        useVersion(ProjectSettings.versions.androidxActivity)
+                        useVersion(Versions.androidxActivity)
                     } else if (groupName == "com.google.accompanist") {
                         if (moduleName == "accompanist-coil") {
-                            useVersion(ProjectSettings.versions.accompanistCoil)
+                            useVersion(Versions.accompanistCoil)
                         } else if (moduleName == "accompanist-webview") {
-                            useVersion(ProjectSettings.versions.accompanistWebView)
+                            useVersion(Versions.accompanistWebView)
                         }
                     } else if (groupName == "androidx.annotation") {
                         if (moduleName == "annotation") {
-                            useVersion(ProjectSettings.versions.androidxAnnotation)
+                            useVersion(Versions.androidxAnnotation)
                         }
                     } else if (groupName == "androidx.appcompat") {
-                        useVersion(ProjectSettings.versions.androidxAppcompat)
+                        useVersion(Versions.androidxAppcompat)
                     } else if (groupName == "androidx.arch.core") {
-                        useVersion(ProjectSettings.versions.androidxArchCore)
+                        useVersion(Versions.androidxArchCore)
                     } else if (groupName == "androidx.cardview") {
-                        useVersion(ProjectSettings.versions.androidxCardView)
+                        useVersion(Versions.androidxCardView)
                     } else if (groupName == "androidx.collection") {
-                        useVersion(ProjectSettings.versions.androidxCollection)
+                        useVersion(Versions.androidxCollection)
                     } else if (groupName == "androidx.compose.animation") {
-                        useVersion(ProjectSettings.versions.androidxComposeAnimation)
+                        useVersion(Versions.androidxComposeAnimation)
                     } else if (groupName == "androidx.compose.compiler") {
-                        useVersion(ProjectSettings.versions.androidxComposeCompiler)
+                        useVersion(Versions.androidxComposeCompiler)
                     } else if (groupName == "androidx.compose.foundation") {
-                        useVersion(ProjectSettings.versions.androidxComposeFoundation)
+                        useVersion(Versions.androidxComposeFoundation)
                     } else if (groupName == "androidx.compose.material") {
-                        useVersion(ProjectSettings.versions.androidxComposeMaterial)
+                        useVersion(Versions.androidxComposeMaterial)
                     } else if (groupName == "androidx.compose.material3") {
-                        useVersion(ProjectSettings.versions.androidxComposeMaterial3)
+                        useVersion(Versions.androidxComposeMaterial3)
                     } else if (groupName == "androidx.compose.runtime") {
-                        useVersion(ProjectSettings.versions.androidxComposeRuntime)
+                        useVersion(Versions.androidxComposeRuntime)
                     } else if (groupName == "androidx.compose.ui") {
-                        useVersion(ProjectSettings.versions.androidxComposeUi)
+                        useVersion(Versions.androidxComposeUi)
                     } else if (groupName == "androidx.constraintlayout") {
                         if (moduleName == "constraintlayout") {
-                            useVersion(ProjectSettings.versions.androidxConstraintLayout)
+                            useVersion(Versions.androidxConstraintLayout)
                         }
                     } else if (groupName == "androidx.coordinatorlayout") {
-                        useVersion(ProjectSettings.versions.androidxCoordinatorLayout)
+                        useVersion(Versions.androidxCoordinatorLayout)
                     } else if (groupName == "androidx.core") {
-                        useVersion(ProjectSettings.versions.androidxCore)
+                        useVersion(Versions.androidxCore)
                     } else if (groupName == "androidx.cursoradapter") {
-                        useVersion(ProjectSettings.versions.androidxCursorAdapter)
+                        useVersion(Versions.androidxCursorAdapter)
                     } else if (groupName == "androidx.customview") {
-//                useVersion(versions.androidxCustomView
+//                        useVersion(ProjectSettings.versions.androidxCustomView)
                     } else if (groupName == "androidx.drawerlayout") {
-                        useVersion(ProjectSettings.versions.androidxDrawerlayout)
+                        useVersion(Versions.androidxDrawerlayout)
                     } else if (groupName == "androidx.exifinterface") {
-                        useVersion(ProjectSettings.versions.androidxExifinterface)
+                        useVersion(Versions.androidxExifinterface)
                     } else if (groupName == "androidx.fragment") {
-                        useVersion(ProjectSettings.versions.androidxFragment)
+                        useVersion(Versions.androidxFragment)
                     } else if (groupName == "androidx.legacy") {
-                        useVersion(ProjectSettings.versions.androidxLegacy)
+                        useVersion(Versions.androidxLegacy)
                     } else if (groupName == "androidx.lifecycle") {
-                        useVersion(ProjectSettings.versions.androidxLifecycle)
+                        if (moduleName == "lifecycle-extensions") {
+                            useVersion(Versions.androidxLifecycleExtensions)
+                        } else {
+                            useVersion(Versions.androidxLifecycle)
+                        }
                     } else if (groupName == "androidx.multidex") {
-                        useVersion(ProjectSettings.versions.androidxMultiDex)
+                        useVersion(Versions.androidxMultiDex)
                     } else if (groupName == "androidx.navigation") {
-                        useVersion(ProjectSettings.versions.androidXNavigation)
+                        useVersion(Versions.androidXNavigation)
                     } else if (groupName == "androidx.room") {
-                        useVersion(ProjectSettings.versions.roomVersion)
+                        useVersion(Versions.roomVersion)
                     } else if (groupName == "androidx.savedstate") {
-                        useVersion(ProjectSettings.versions.androidxSavedState)
+                        useVersion(Versions.androidxSavedState)
                     } else if (groupName == "androidx.startup") {
-                        useVersion(ProjectSettings.versions.androidxStartUp)
+                        useVersion(Versions.androidxStartUp)
                     } else if (groupName == "androidx.test") {
                         if (moduleName == "monitor") {
-                            useVersion(ProjectSettings.versions.androidxTestMonitor)
+                            useVersion(Versions.androidxTestMonitor)
                         }
                     } else if (groupName == "androidx.test.espresso") {
-                        useVersion(ProjectSettings.versions.androidxTestEspresso)
+                        useVersion(Versions.androidxTestEspresso)
                     } else if (groupName == "androidx.test.ext") {
-                        useVersion(ProjectSettings.versions.androidxTestExt)
+                        useVersion(Versions.androidxTestExt)
                     } else if (groupName == "androidx.transition") {
-                        useVersion(ProjectSettings.versions.androidxTransition)
+                        useVersion(Versions.androidxTransition)
                     } else if (groupName == "androidx.vectordrawable") {
-                        useVersion(ProjectSettings.versions.androidxVectorDrawable)
+                        useVersion(Versions.androidxVectorDrawable)
                     } else if (groupName == "androidx.webkit") {
-                        useVersion(ProjectSettings.versions.androidxWebKit)
+                        useVersion(Versions.androidxWebKit)
                     } else if (groupName == "androidx.work") {
-                        useVersion(ProjectSettings.versions.androidxWork)
+                        useVersion(Versions.androidxWork)
                     } else if (groupName == "com.google.android.material") {
-                        useVersion(ProjectSettings.versions.comGoogleAndroidMaterial)
+                        useVersion(Versions.comGoogleAndroidMaterial)
                     } else if (groupName == "com.github.bumptech.glide") {
-                        useVersion(ProjectSettings.versions.glide)
+                        useVersion(Versions.glide)
                     } else if (groupName == "com.google.code.findbugs") {
-                        useVersion(ProjectSettings.versions.findbugs)
+                        useVersion(Versions.findbugs)
                     } else if (groupName == "com.squareup.okhttp3") {
-                        useVersion(ProjectSettings.versions.okhttp)
+                        useVersion(Versions.okhttp)
                     } else if (groupName == "com.squareup.okio") {
-                        useVersion(ProjectSettings.versions.okio)
+                        useVersion(Versions.okio)
                     } else if (groupName == "joda-time") {
-                        useVersion(ProjectSettings.versions.jodaTime)
+                        useVersion(Versions.jodaTime)
                     } else if (groupName == "org.jruby") {
-                        useVersion(ProjectSettings.versions.jruby)
+                        useVersion(Versions.jruby)
                     } else if (groupName == "com.smallbuer") {
                         if (moduleName == "jsbridge") {
-                            useVersion(ProjectSettings.versions.jsbridge)
+                            useVersion(Versions.jsbridge)
                         }
                     } else if (groupName == "net.minidev") {
                         if (moduleName == "json-smart") {
-                            useVersion(ProjectSettings.versions.jsonSmart)
+                            useVersion(Versions.jsonSmart)
                         }
                     } else if (groupName == "junit") {
-                        useVersion(ProjectSettings.versions.junit)
+                        useVersion(Versions.junit)
                     } else if (groupName == "org.slf4j") {
-                        useVersion(ProjectSettings.versions.slf4j)
+                        useVersion(Versions.slf4j)
                     } else if (groupName == "org.jetbrains.kotlin") {
                         if (moduleName == "kotlin-stdlib" || moduleName == "kotlin-stdlib-jdk7" || moduleName == "kotlin-stdlib-jdk8" || moduleName == "kotlin-stdlib-common" || moduleName == "kotlin-reflect") {
-                            useVersion(ProjectSettings.versions.kotlin_version)
+                            useVersion(Versions.kotlinVersion)
                         }
                     } else if (groupName == "org.jetbrains.kotlinx") {
                         if (moduleName == "kotlinx-coroutines-android"
                             || moduleName == "kotlinx-coroutines-core"
                             || moduleName == "kotlinx-coroutines-bom"
                         ) {
-                            useVersion(ProjectSettings.versions.kotlinxCoroutinesAndroid)
+                            useVersion(Versions.kotlinxCoroutinesAndroid)
                         }
                     } else if (groupName == "com.iqiyi.xcrash") {
-                        useVersion(ProjectSettings.versions.xcrash)
+                        useVersion(Versions.xcrash)
                     } else if (groupName == "com.github.yalantis") {
                         if (moduleName == "ucrop") {
-                            useVersion(ProjectSettings.versions.ucrop)
+                            useVersion(Versions.ucrop)
                         }
                     } else if (groupName == "org.apache.commons") {
                         if (moduleName == "commons-lang3") {
-                            useVersion(ProjectSettings.versions.orgApacheCommonsLang3)
+                            useVersion(Versions.orgApacheCommonsLang3)
                         }
                     } else if (groupName == "commons-io") {
                         if (moduleName == "commons-io") {
-                            useVersion(ProjectSettings.versions.commonsIO)
+                            useVersion(Versions.commonsIO)
                         }
                     } else if (groupName == "com.squareup.retrofit2") {
-                        useVersion(ProjectSettings.versions.comSquareupRetrofit2)
+                        useVersion(Versions.comSquareupRetrofit2)
                     } else if (groupName == "com.afollestad.material-dialogs") {
-                        useVersion(ProjectSettings.versions.comAfollestadMaterialDialogs)
+                        useVersion(Versions.comAfollestadMaterialDialogs)
                     } else if (groupName == "com.google.code.gson") {
-                        useVersion(ProjectSettings.versions.gson)
+                        useVersion(Versions.gson)
                     } else if (groupName == "com.google.mlkit") {
                         if (moduleName == "text-recognition") {
-                            useVersion(ProjectSettings.versions.mlkit)
+                            useVersion(Versions.mlkit)
                         }
                     } else if (groupName == "com.google.guava") {
                         if (moduleName == "guava") {
-                            useVersion(ProjectSettings.versions.guava)
+                            useVersion(Versions.guava)
                         }
                     } else if (groupName == "com.google.android.tools") {
                         if (moduleName == "dx") {
-                            useVersion(ProjectSettings.versions.androidDx)
+                            useVersion(Versions.androidDx)
                         }
                     } else if (groupName == "org.bouncycastle") {
-                        useVersion(ProjectSettings.versions.bouncycastle)
+                        useVersion(Versions.bouncycastle)
                     } else if (groupName == "org.ow2.asm") {
-                        useVersion(ProjectSettings.versions.asm)
+                        useVersion(Versions.asm)
                     } else if (groupName == "net.bytebuddy") {
-                        useVersion(ProjectSettings.versions.bytebuddy)
+                        useVersion(Versions.bytebuddy)
                     } else if (groupName == "com.blankj") {
-                        useVersion(ProjectSettings.versions.utilCodex)
+                        useVersion(Versions.utilCodex)
                     } else if (groupName == "org.conscrypt") {
-                        useVersion(ProjectSettings.versions.conscryptAndroid)
+                        useVersion(Versions.conscryptAndroid)
                     } else if (groupName == "com.github.getActivity") {
                         if (moduleName == "Toaster") {
-                            useVersion(ProjectSettings.versions.Toaster)
+                            useVersion(Versions.Toaster)
                         } else if (moduleName == "XXPermissions") {
-                            useVersion(ProjectSettings.versions.XXPermissions)
+                            useVersion(Versions.XXPermissions)
                         }
                     } else if (groupName == "io.coil-kt") {
-                        useVersion(ProjectSettings.versions.coil)
+                        useVersion(Versions.coil)
                     } else if (groupName == "io.netty") {
-                        useVersion(ProjectSettings.versions.netty)
+                        useVersion(Versions.netty)
                     }
                 }
             }

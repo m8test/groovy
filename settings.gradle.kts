@@ -16,11 +16,11 @@ dependencyResolutionManagement {
     }
     versionCatalogs {
         create("m8test") {
-            from(files("./project.versions.toml"))
+            from(files("./libs.versions.toml"))
         }
     }
 }
 
 include(":document")
 include(":sample")
-includeBuild("version")
+includeBuild("composite-builds")
