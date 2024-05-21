@@ -15,7 +15,7 @@ dependencies {
     implementation(gradleApi())
     implementation("com.android.tools.build:gradle:${m8test.versions.agp.get()}")
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:${m8test.versions.kotlinVersion.get()}")
-    implementation("com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:${m8test.versions.kotlinVersion.get()}-1.0.19")
+    implementation("com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:${m8test.versions.kotlinVersion.get()}-1.0.20")
 }
 
 gradlePlugin {

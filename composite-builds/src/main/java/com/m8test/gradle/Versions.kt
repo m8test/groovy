@@ -12,7 +12,7 @@ import org.gradle.api.JavaVersion
 object Versions {
     val javaSourceCompatibility = JavaVersion.VERSION_11
     val javaTargetCompatibility = JavaVersion.VERSION_11
-    const val kotlinVersion = "1.9.23"
+    const val kotlinVersion = "1.9.24"
     const val jvmTarget = "11"
     const val target = 34
     const val mini = 21

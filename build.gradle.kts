@@ -15,7 +15,7 @@ buildscript {
     dependencies {
         classpath("com.android.tools.build:gradle:${m8test.versions.agp.get()}")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${m8test.versions.kotlinVersion.get()}")
-        classpath("com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:${m8test.versions.kotlinVersion.get()}-1.0.19")
+        classpath("com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:${m8test.versions.kotlinVersion.get()}-1.0.20")
     }
 }
 
